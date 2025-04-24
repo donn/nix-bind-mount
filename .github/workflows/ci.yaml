@@ -30,7 +30,8 @@ jobs:
           mkdir -p $PWD/tmpdir
           sudo chown -R 0:0 $PWD/tmpdir
           sudo chmod a=rwx,o+t $PWD/tmpdir
-          echo "TMPDIR=$PWD/tmpdir" >> $GITHUB_ENV
+          sudo mkdirp -p /tmp
+          sudo mount --bind $PWD/tmpdir /tmp
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
