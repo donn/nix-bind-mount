@@ -30,3 +30,6 @@ jobs:
         with:
           extra-conf: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - name: Run OpenLane Smoke Test
+        run: |
+          nix run github:efabless/openlane2 -- --smoke-test
