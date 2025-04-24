@@ -26,6 +26,11 @@ jobs:
           sudo chown -R 0:0 $PWD/nix
           sudo mkdir -p /nix
           sudo mount --bind $PWD/nix /nix
+
+          mkdir -p $PWD/tmpdir
+          sudo chown -R 0:0 $PWD/tmpdir
+          sudo chmod a=rwx,o+t $PWD/tmpdir
+          echo "TMPDIR=$PWD/tmpdir" >> $GITHUB_ENV
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
