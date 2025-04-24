@@ -38,4 +38,4 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - name: Run OpenLane Smoke Test
         run: |
-          nix run github:efabless/openlane2 -- --smoke-test
+          nix run --accept-flake-config github:efabless/openlane2 -- --smoke-test
