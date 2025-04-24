@@ -23,6 +23,7 @@ jobs:
       - name: Bind Mount Nix Tree
         run: |
           mkdir -p $PWD/nix
+          sudo chown -R 0:0 $PWD/nix
           sudo mkdir -p /nix
           sudo mount --bind $PWD/nix /nix
       - uses: DeterminateSystems/nix-installer-action@main
