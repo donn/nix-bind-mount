@@ -1,0 +1,31 @@
+name: CI
+
+# Events that trigger workflow
+on:
+  # Runs on all pushes to branches
+  push:
+  # Manual Dispatch
+  workflow_dispatch:
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-22.04-arm
+    name: Test
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+          remove-docker-images: "true"
+      - name: Bind Mount Nix Tree
+        run: |
+          mkdir -p $PWD/nix
+          sudo mkdir -p /nix
+          sudo mount --bind $PWD/nix /nix
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
